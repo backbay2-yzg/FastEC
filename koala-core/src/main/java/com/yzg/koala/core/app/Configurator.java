@@ -1,11 +1,14 @@
 package com.yzg.koala.core.app;
 
+import java.util.ArrayList;
 import java.util.WeakHashMap;
+
+import okhttp3.Interceptor;
 
 public class Configurator {
 
-    private static final WeakHashMap<String,Object> KOALA_CONFIGS = new WeakHashMap<>();
-
+    private static final WeakHashMap<Object,Object> KOALA_CONFIGS = new WeakHashMap<>();
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     public Configurator() {
         KOALA_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
@@ -15,7 +18,7 @@ public class Configurator {
         return Holder.INSTANCE;
     }
 
-    public WeakHashMap<String,Object>  getKoalaConfigs(){
+    public WeakHashMap<Object,Object>  getKoalaConfigs(){
         return KOALA_CONFIGS;
     }
 
@@ -32,6 +35,16 @@ public class Configurator {
         return this;
     }
 
+    public final  Configurator withInterceptor(Interceptor interceptor){
+        INTERCEPTORS.add(interceptor);
+        KOALA_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+    public final  Configurator withInterceptors(ArrayList<Interceptor>  interceptors){
+        INTERCEPTORS.addAll(interceptors);
+        KOALA_CONFIGS.put(ConfigType.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
     private void checkConfiguration(){
         final boolean isReady = (boolean) KOALA_CONFIGS.get(ConfigType.CONFIG_READY.name());
         if (!isReady){
@@ -39,9 +52,13 @@ public class Configurator {
         }
     }
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Enum<ConfigType> key){
+    final <T> T getConfiguration(Object key){
         checkConfiguration();
-        return (T) KOALA_CONFIGS.get(key.name());
+        final Object value = KOALA_CONFIGS.get(key);
+        if (value==null){
+            throw new NullPointerException(key.toString() + " IS NULL");
+        }
+        return (T) KOALA_CONFIGS.get(key);
     }
 }
 

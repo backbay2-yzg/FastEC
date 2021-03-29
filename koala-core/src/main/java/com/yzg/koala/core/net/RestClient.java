@@ -11,9 +11,7 @@ import com.yzg.koala.core.net.download.DownloadHandler;
 import com.yzg.koala.core.ui.KoalaLoader;
 import com.yzg.koala.core.ui.LoaderStyle;
 
-import java.io.EOFException;
 import java.io.File;
-import java.io.UTFDataFormatException;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -22,7 +20,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.http.Body;
 
 public class RestClient {
 
@@ -155,10 +152,11 @@ public class RestClient {
         request(HttpMethod.DELETE);
     }
 
-    public final void upload(){
+    public final void upload() {
         request(HttpMethod.UPLOAD);
     }
-    public final void download(){
-        new DownloadHandler(URL,REQUEST,DOWNLOAD_DIR,EXTENSION,NAME,SUCCESS,FAILURE, ERROR).handleDownload();
+
+    public final void download() {
+        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME, SUCCESS, FAILURE, ERROR).handleDownload();
     }
 }

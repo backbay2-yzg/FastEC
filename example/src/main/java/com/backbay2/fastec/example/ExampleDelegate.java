@@ -28,20 +28,22 @@ public class ExampleDelegate extends KoalaDelegate {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private  void testRestClient(){
         RestClient.builder()
-                .url("https://news.baidu.com")
+                .url("https://www.mxnzp.com/api/barcode/create")
+                //.url("https://www.baidu.com/")
 //                .params("","")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
                         Log.e("RestClient", "onSuccess: "+response );
                     }
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
-                        Toast.makeText(getContext(), "onFailure", Toast.LENGTH_SHORT).show();
+                    public void onFailure(Throwable throwable) {
+                        Log.e("TAG", "onFailure: ",throwable );
+                        Toast.makeText(getContext(), "onFailure: "+throwable, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .error(new IError() {
