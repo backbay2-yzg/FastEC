@@ -1,0 +1,2 @@
+include ':example', ':koala-ec', ':koala-core', ':koala-compiler', ':koala-annotations'
+rootProject.name='FastEC'
