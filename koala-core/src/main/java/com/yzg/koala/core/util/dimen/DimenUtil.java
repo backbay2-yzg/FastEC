@@ -1,4 +1,4 @@
-package com.yzg.koala.core.util;
+package com.yzg.koala.core.util.dimen;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

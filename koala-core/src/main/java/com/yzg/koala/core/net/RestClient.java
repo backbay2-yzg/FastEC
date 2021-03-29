@@ -7,10 +7,13 @@ import com.yzg.koala.core.net.callback.IFailure;
 import com.yzg.koala.core.net.callback.IRequest;
 import com.yzg.koala.core.net.callback.ISuccess;
 import com.yzg.koala.core.net.callback.RequestCallbacks;
+import com.yzg.koala.core.net.download.DownloadHandler;
 import com.yzg.koala.core.ui.KoalaLoader;
 import com.yzg.koala.core.ui.LoaderStyle;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.UTFDataFormatException;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -156,6 +159,6 @@ public class RestClient {
         request(HttpMethod.UPLOAD);
     }
     public final void download(){
-
+        new DownloadHandler(URL,REQUEST,DOWNLOAD_DIR,EXTENSION,NAME,SUCCESS,FAILURE, ERROR).handleDownload();
     }
 }

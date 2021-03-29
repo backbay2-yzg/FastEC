@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDialog;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import com.yzg.koala.core.R;
-import com.yzg.koala.core.util.DimenUtil;
+import com.yzg.koala.core.util.dimen.DimenUtil;
 
 import java.util.ArrayList;
 
